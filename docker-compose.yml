@@ -1,47 +1,24 @@
-version: "3.8"
+version: '3'
 
 services:
   backend:
-    image: hostel-backend
-    container_name: hostel-backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     ports:
-      - "5112:5111"
-    environment:
-      - NODE_ENV=production
-    depends_on:
-      - mongo
+      - "5121:5121"
+    env_file:
+      - ./backend/.env
     networks:
-      - hostel-network
+      - app_network
 
   frontend:
-    image: hostel-frontend
-    container_name: hostel-frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3001:3000"
-    depends_on:
-      - backend
+      - "8094:8094"
     networks:
-      - hostel-network
-
-  mongo:
-    image: mongo
-    container_name: hostel-mongo
-    ports:
-      - "27017:27017"
-    networks:
-      - hostel-network
-    volumes:
-      - mongo-data:/data/db
+      - app_network
 
 networks:
-  hostel-network:
-
-volumes:
-  mongo-data:
-
+  app_network:
+    driver: bridge
