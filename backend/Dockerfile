@@ -13,7 +13,7 @@ RUN npm install
 # Copy all backend files
 COPY . .
 
-# Expose port (change if necessary)
+# Expose port for backend
 EXPOSE 5111
 
 # Start the backend server

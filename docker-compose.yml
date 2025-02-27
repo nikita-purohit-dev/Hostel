@@ -1,6 +1,3 @@
-version: "3.8"
-
-services:
   backend:
     image: hostel-backend
     container_name: hostel-backend
@@ -11,37 +8,10 @@ services:
       - "5112:5111"
     environment:
       - NODE_ENV=production
+      - MONGO_URI=${MONGO_URI}  # Ensure Mongo URI is set from your .env
     depends_on:
       - mongo
     networks:
       - hostel-network
-
-  frontend:
-    image: hostel-frontend
-    container_name: hostel-frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3000"
-    depends_on:
-      - backend
-    networks:
-      - hostel-network
-
-  mongo:
-    image: mongo
-    container_name: hostel-mongo
-    ports:
-      - "27017:27017"
-    networks:
-      - hostel-network
-    volumes:
-      - mongo-data:/data/db
-
-networks:
-  hostel-network:
-
-volumes:
-  mongo-data:
-
+    env_file:
+      - .env  # Load the environment variables from your .env file
