@@ -1,22 +1,20 @@
-# Use Node.js to build the frontend
-FROM node:18 AS build
+# Use official Node.js image as base
+FROM node:18-alpine
+
+# Set working directory inside the container
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
+# Copy all frontend files
 COPY . .
-RUN npm run build
 
-# Use Nginx to serve static files
-FROM nginx:latest
-WORKDIR /etc/nginx/conf.d/
+# Expose the port for the frontend (default Vite port)
+EXPOSE 3000
 
-# Copy static build files to Nginx root
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy Nginx config
-COPY config/nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 8094
-CMD ["nginx", "-g", "daemon off;"]
+# Start the frontend server
+CMD ["npm", "run", "dev"]
