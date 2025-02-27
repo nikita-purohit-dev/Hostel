@@ -1,18 +1,20 @@
-# Use official Node.js image
-FROM node:18
+# Use official Node.js image as base
+FROM node:18-alpine
 
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and install dependencies first
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy the entire backend project
+# Copy all backend files
 COPY . .
 
-# Expose the correct port
+# Expose port (change if necessary)
 EXPOSE 5111
 
-# Start the application
+# Start the backend server
 CMD ["npm", "start"]
