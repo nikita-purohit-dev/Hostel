@@ -12,16 +12,17 @@ app.use(express.urlencoded({ extended: true }));
 const connectDB = require("./config/db");
 connectDB();
 
-const roomInquiryRoutes = require("./routes/roomInquiryRoutes");
-const accommodation = require("./routes/accommodationRoutes");
-const cleaning = require("./routes/cleaningRoutes");
-const medical = require("./routes/medicalRoutes");
-const clearance = require("./routes/clearanceRoutes");
-const leave = require("./routes/leaveRoutes");
-const user = require("./routes/userRoutes");
-const adminRoutes = require('./routes/adminRoutes');
-const attendanceRoutes = require('./routes/attendanceRoutes');
-const roomRoutes = require('./routes/roomRoutes');
+const roomInquiryRoutes = require("../backend/routes/roomInquiryRoutes");
+const accommodation = require("../backend/routes/accommodationRoutes");
+const cleaning = require("../backend/routes/cleaningRoutes");
+const medical = require("../backend/routes/medicalRoutes");
+const clearance = require("../backend/routes/clearanceRoutes");
+const leave = require("../backend/routes/leaveRoutes");
+const user = require("../backend/routes/userRoutes");
+const adminRoutes = require('../backend/routes/adminRoutes');
+const attendanceRoutes = require('../backend/routes/attendanceRoutes');
+const roomRoutes = require('../backend/routes/roomRoutes');
+
 
 
 
