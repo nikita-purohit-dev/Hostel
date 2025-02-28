@@ -1,15 +1,19 @@
 # Use Node.js to build the frontend
 FROM node:18 AS build
+
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+
 RUN npm install
 
 COPY . .
+
 RUN npm run build
 
 # Use Nginx to serve static files
 FROM nginx:latest
+
 WORKDIR /etc/nginx/conf.d/
 
 # Copy static build files to Nginx root
