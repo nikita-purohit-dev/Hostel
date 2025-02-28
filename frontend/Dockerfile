@@ -16,7 +16,8 @@ WORKDIR /etc/nginx/conf.d/
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy Nginx config
-COPY config/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+
 
 EXPOSE 8094
 CMD ["nginx", "-g", "daemon off;"]
